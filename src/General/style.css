@@ -1,0 +1,237 @@
+header {
+    background: rgb(70, 199, 224);
+    padding: 12px 20px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+}
+header .search-block {
+    order: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.header__meny {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.header_meny>span>*{
+    cursor: pointer;
+}
+.header_meny svg:hover{
+    fill: orange;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.logo img {
+    height: 70px;
+}
+.search {
+    width: 280px;
+    height: 20px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    outline: none;
+    background-color: inherit;
+    padding: 4px 8px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+.search:focus {
+    background-color: white;
+}
+.containerbanner {
+    display: flex;
+    align-items: stretch;
+    opacity: 70%;
+}
+.banner {
+    height: 150px;
+    width: 100%;
+    border: 5px solid;
+    border-radius: 10px;
+    color: rgb(67, 76, 195);
+    font-size: 40px;
+    font-stretch: expanded;
+    background-image: url("./images/banner.avif");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    text-align: center;
+    margin: 100px;
+    position: inherit;
+}
+.adblock1 {
+    width: 100%;
+    border: 5px solid;
+    border-radius: 10px;
+    color: rgb(67, 76, 195);
+    background-color: rgb(232, 235, 39);
+    text-align: center;
+    margin: 100px;
+}
+.adblock2 {
+    width: 100%;
+    border: 5px solid;
+    border-radius: 10px;
+    color: rgb(67, 76, 195);
+    background-color: rgb(47, 221, 61);
+    text-align: center;
+    margin: 100px;
+}
+footer {
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(65, 164, 230);
+    color: yellow;
+    bottom: 0;
+    width: 100%;
+}
+.footer__copy {
+    display: grid;
+    align-content: space-between;
+}
+.footer__nav {
+    display: grid;
+    gap: 10px;
+ 
+}
+.footer__nav a:hover {
+    color: orange;
+}
+
+
+@media(min-width: 576px){
+    header {
+        flex-wrap: no-wrap;
+    }
+    header .search-block {
+        order: 0;
+        width: auto;
+    }
+}
+.modal-wrapper {
+	position: fixed;
+	background: #228b2288;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	backdrop-filter: blur(1px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.modal {
+	width: 300px;
+	background-color: white;
+	padding: 20px;
+	box-sizing: border-box;
+	position: relative;
+	border-radius: 8px;
+	display: block;
+	height: auto;
+}
+.modal-close {
+	position: absolute;
+	top: 10px;
+	right: 6px;
+	border: none;
+	background-color: transparent;
+	outline: none;
+	cursor: pointer;
+	font-size: 1.2rem;
+}
+.modal-close:hover {
+	color: forestgreen;
+}
+h3 {
+	margin: 0;
+	margin-bottom: 20px;
+}
+.modal form {
+	display: grid;
+	gap: 10px;
+}
+.modal-btns {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	font-size: 12px;
+}
+.modal-link {
+	border: 1px solid;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+.info {
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .info-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-shadow: 0 0 2px yellow;
+    user-select: none;
+  }
+  .info-link:hover {
+    text-shadow: 0 0 7px yellow;
+  }
+  .card-lite {
+    background-color: #fff;
+    display: grid;
+    gap: 12px;
+    border: 1px solid forestgreen;
+    padding: 12px;
+    border-radius: 8px;
+    grid-template-rows: 120px auto 1fr 30px;
+    align-content: flex-start;
+    position: relative;
+    overflow: hidden;
+}
+.card-lite h4 {
+    margin: 0;
+}
+.card-lite p {
+    margin: 0;
+}
+.card-lite img {
+    height: 100%;
+    justify-self: center;
+}
+.card-lite button {
+    position: relative;
+    z-index: 1;
+}
+.card-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.card-like {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    z-index: 1;
+    color: red;
+}
