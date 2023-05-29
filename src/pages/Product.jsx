@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import {useParams, Link} from "react-router-dom";
+<<<<<<< HEAD
 import {Button, Card, Accordion, Alert, Form, Col} from "react-bootstrap"
 import { useNavigate } from "react-router-dom";
 import {StarFill, Star} from "react-bootstrap-icons"
@@ -14,6 +15,12 @@ import {StarFill, Star} from "react-bootstrap-icons"
     const [review, setReview] = useState("");
     const [rating, setRating] = useState(false);
 
+=======
+
+const Product = () => {
+	const { id } = useParams()
+	const [data, setData] = useState({});
+>>>>>>> 90d281bdc035b03fabb5a97d5edb3355534f11d0
 
 	useEffect(() => {
 		fetch(`https://api.react-learning.ru/products/${id}`, {
@@ -25,6 +32,7 @@ import {StarFill, Star} from "react-bootstrap-icons"
 			.then(serverData => {
 				setData(serverData);
 			})
+<<<<<<< HEAD
 	}, [setData])
 
 	const feedback = (e) => {
@@ -111,6 +119,19 @@ import {StarFill, Star} from "react-bootstrap-icons"
 
 			</div>
 
+=======
+	}, [])
+	return <>
+		<Link to={`/catalog#pro_${id}`}>Назад</Link>
+		{data.name 
+			? <>
+				<h1>{data.name}</h1>
+				<img src={data.pictures} alt={data.name} />
+			</> 
+			: <div className="info" style={{textAlign: "center"}}>
+				Товара {id} не существует<br/>или<br/>он еще не загружен
+			</div>
+>>>>>>> 90d281bdc035b03fabb5a97d5edb3355534f11d0
 		}
 	</>
 }

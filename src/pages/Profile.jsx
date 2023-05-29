@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {useEffect, useState} from "react";
 import {Trash3Fill} from "react-bootstrap-icons"
 import {useNavigate, Link} from "react-router-dom";
@@ -283,6 +284,21 @@ function DelReview(product, id)  {
 		 </Tabs>
 
 
+=======
+import {useNavigate} from "react-router-dom";
+
+const Profile = ({user, setUser}) => {
+	const navigate = useNavigate()
+	const logOut = () => {
+		setUser("");
+		localStorage.removeItem("user12");
+		navigate("/");
+	}
+	return <>
+		<h1>Личный кабинет</h1>
+		<p>Привет, {user}!</p>
+		<button onClick={logOut}>Выйти из аккаунта</button>
+>>>>>>> 90d281bdc035b03fabb5a97d5edb3355534f11d0
 	</>
 }
 export default Profile;
