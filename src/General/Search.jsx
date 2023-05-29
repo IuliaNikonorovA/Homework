@@ -11,13 +11,7 @@ const Search = ({data, setGoods, setSearchResult}) => {
 		let val = e.target.value.toLowerCase();
 		setText(val);
 	}
-<<<<<<< HEAD
-=======
-	// const changeText = () => {
-	// 	console.log("Click")
-	// 	setText("Привет!");
-	// }
->>>>>>> 90d281bdc035b03fabb5a97d5edb3355534f11d0
+
 	useEffect(() => {
 		let str = '';
 		if (num && text) {

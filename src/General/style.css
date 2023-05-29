@@ -6,12 +6,9 @@ header {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-<<<<<<< HEAD
     position: fixed;
     z-index: 100;
     width: 100%;
-=======
->>>>>>> 90d281bdc035b03fabb5a97d5edb3355534f11d0
 }
 header .search-block {
     order: 1;
@@ -72,12 +69,8 @@ header .search-block {
     background-repeat: no-repeat;
     background-size: 100%;
     text-align: center;
-<<<<<<< HEAD
     margin: 100px;
     position: inherit;
-=======
-    margin: 5px;
->>>>>>> 90d281bdc035b03fabb5a97d5edb3355534f11d0
 }
 .adblock1 {
     width: 100%;
@@ -86,11 +79,7 @@ header .search-block {
     color: rgb(67, 76, 195);
     background-color: rgb(232, 235, 39);
     text-align: center;
-<<<<<<< HEAD
     margin: 100px;
-=======
-    margin: 5px;
->>>>>>> 90d281bdc035b03fabb5a97d5edb3355534f11d0
 }
 .adblock2 {
     width: 100%;
@@ -99,11 +88,7 @@ header .search-block {
     color: rgb(67, 76, 195);
     background-color: rgb(47, 221, 61);
     text-align: center;
-<<<<<<< HEAD
     margin: 100px;
-=======
-    margin: 5px;
->>>>>>> 90d281bdc035b03fabb5a97d5edb3355534f11d0
 }
 footer {
     padding: 12px 20px;
@@ -112,10 +97,7 @@ footer {
     background-color: rgb(65, 164, 230);
     color: yellow;
     bottom: 0;
-<<<<<<< HEAD
     width: 100%;
-=======
->>>>>>> 90d281bdc035b03fabb5a97d5edb3355534f11d0
 }
 .footer__copy {
     display: grid;
