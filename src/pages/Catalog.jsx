@@ -1,11 +1,11 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import {Container, Row, Col} from "react-bootstrap";
 import BsCard from "../General/Card";
 import Ctx from "../ctx";
 
 
-const Catalog = ({goods, setBaseData, userId}) => {
-	const {searchResult} = useContext(Ctx);
+const Catalog = () => {
+	const {searchResult, goods, setBaseData, userId} = useContext(Ctx);
 	return <Container className="d-block">
 		<Row className="g-4">
 		{searchResult && <Col xs={12} className="search-result">

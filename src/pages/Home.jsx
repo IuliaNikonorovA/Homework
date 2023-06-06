@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Journals } from "react-bootstrap-icons";
-
 import Slider from "../General/Slider";
 
 const Home = ({user, setActive}) => {

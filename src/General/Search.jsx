@@ -1,8 +1,10 @@
+import { useContext } from "react";
 import {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-//import "./style.css";
+import Ctx from "../ctx";
 
-const Search = ({data, setGoods, setSearchResult}) => {
+const Search = () => {
+	const {baseData, setGoods, setSearchResult}= useContext(Ctx)
 	const navigate = useNavigate();
 	const [text, setText] = useState("");
 	const [num, setNum] = useState(0);
@@ -23,8 +25,9 @@ const Search = ({data, setGoods, setSearchResult}) => {
 		}
 		setSearchResult(str);
 	}, [num, text]);
+
 	useEffect(() => {
-		let result = data.filter(el => el.name.toLowerCase().includes(text));
+		let result = baseData.filter(el => el.name.toLowerCase().includes(text));
 		setGoods(result);
 		setNum(result.length);
 	}, [text]);

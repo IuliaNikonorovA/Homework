@@ -1,15 +1,24 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, useContext} from "react";
 import {Trash3Fill} from "react-bootstrap-icons"
 import {useNavigate, Link} from "react-router-dom";
-import {Button, Col, Tab, Tabs, Table, Container, Row, Card, Modal, Form} from "react-bootstrap"
+import {Button, Col, Tab, Tabs, Table, Container, Row, Card, Modal, Form, Image, Figure, CardGroup,} from "react-bootstrap"
+import UpdatedInput from "../General/UpdatedInput"
+import Ctx from "../ctx";
 
 
-const Profile = ({user, setUser, goods}) => {
+const Profile = () => {
+    const {user, setUser, api}= useContext(Ctx)
 	const [product, setProduct] =useState([]);
 	const navigate = useNavigate();
 	const [review, setReview]= useState([]);
 	const logOut = () => {setUser("");localStorage.removeItem("user12");navigate("/");}
 	const [show, setShow] = useState(false);
+
+    const [userData, setUserData] = useState({});
+	const [inpName, setInpName] = useState(false);
+	// const [inpEmail, setInpEmail] = useState(false);
+	const [inpAbout, setInpAbout] = useState(false);
+	const [inpAvatar, setInpAvatar] = useState(false);
 
 	const handleClose = () => {setShow(false)};
     const handleShow  = (id) => {setShow(true); setId(id._id); setName(id.name); setLink(id.pictures); setPrice(id.price); setStock(id.stock);setDescription(id.description); setDiscount(id.discount); setWight(id.wight); setTags(id.tags)};
@@ -23,6 +32,27 @@ const Profile = ({user, setUser, goods}) => {
     const [tags, setTags] = useState(); 
     const [id, setId] = useState();
 
+    const updUser = (name, val) => {
+		let body = {
+			name: userData.name,
+			about: userData.about
+		}
+		if (name === "avatar") {
+			body =  {avatar: userData.avatar};
+		}
+		body[name] = val;
+		console.log(body);
+		api.updAdmin(body, name === "avatar").then(data => setUserData(data));
+	}
+    useEffect(() => {
+		api.getAdmin()
+			.then(data => {
+				// console.log(data);
+				setUserData(data);
+			})
+        }, [])
+
+  
 	
 	 useEffect(()=>{
         fetch("https://api.react-learning.ru/products", {
@@ -104,16 +134,69 @@ function DelReview(product, id)  {
     }
 
 
+        let a=product.filter((el=> el._id==="622c779c77d63f6e70967d1c"))
+        //  console.log((a.map((el=>el.pictures))).join())
+        
+    const src=(id)=>{((product.filter((el=> el._id===id)).map((f=>f.pictures)))).join()}
+    
+
+
 	return <>
-		<h1>Личный кабинет</h1>
-		<p>Привет, {user}!</p>
-		
-		{user && <Button variant="outline-danger" size="sm" onClick={logOut}>Выйти из аккаунта</Button>}
+    <div className="m-0 p-1 d-flex justify-content-end">
+            {user && <Button  variant="outline-danger" size="sm" onClick={logOut}>Выйти из аккаунта</Button>}
 		{!user && <Button as={Link} to="/">Войти</Button>}
+    </div>
+
+    <div className="mx-auto w-50 bg-info text-dark bg-opacity-25 text-center border border-info border-start-0 border-end-0">
+		<h1>Личный кабинет</h1>
+		{user && <h4>Привет, <span className="fst-italic">{user}!</span></h4>}
+
+    </div>
+		
 
 		
 		<Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
-		  <Tab eventKey="Избранное" title="Избранное">
+		  <Tab eventKey="Избранное" title="Обо мне">
+          <Container style={{gridTemplateColumns: "1fr"}} className="px-0">
+			<Row>
+				{userData?.name && <>
+					<Col xs={12} sm={6}><h1>Личный кабинет</h1>
+						<div><UpdatedInput
+							val={userData.name}
+							isActive={inpName}
+							changeActive={setInpName}
+							upd={updUser}
+							name="name"
+						/></div>
+						<div className="py-3">{userData.email}</div>
+						<div><UpdatedInput
+							val={userData.about}
+							isActive={inpAbout}
+							changeActive={setInpAbout}
+							upd={updUser}
+							name="about"
+						/></div>
+					</Col>
+					<Col xs={12} sm={6}>
+						<Figure>
+							<Figure.Image
+								src={userData.avatar}
+								alt={userData.email}
+							/>
+							<Figure.Caption>
+								 <UpdatedInput
+									 val={userData.avatar}
+									 isActive={inpAvatar}
+									 changeActive={setInpAvatar}
+									 upd={updUser}
+									 name="avatar"
+								 />
+							</Figure.Caption>
+						</Figure>
+					</Col>
+				</>}
+			</Row>
+            </Container>
 	  	</Tab>
 	
 		<Tab eventKey="Мои товары" title="Мои товары">
@@ -122,27 +205,34 @@ function DelReview(product, id)  {
 		<Button variant="info" as={Link} to="/add/product">Добавить</Button>
 
 		<Container className="d-block">
-		    <Row className="g-4 p-1" >
-			<Col xs={12}>
+		    
+			{/* <Col xs={12} >
 				<h1 style={{margin: 0, gridColumnEnd: "span 3"}}>Мои товары</h1>
- 			</Col> 
-			 {
-			 product.map((el,i)=> el.author._id === localStorage.getItem("user12-id") &&
-				  <Col key={i} xs={12} sm={6} md={4} lg={3}>
-		    	<Card style={{width: "15rem"}}>
-				<Card.Img variant="top" src={el.pictures}/>
-				<Card.Body>
+ 			</Col>  */}
+			 <Row xs={1} md={2} className="g-4">
+			 {product.map((el,i)=> el.author._id === localStorage.getItem("user12-id") &&
+
+				  <Col key={i} xs={12} sm={6} md={4} lg={3} className="text-center w-50">
+		    	<Card>
+                    <div>
+				<Card.Img variant="top" className="w-50" src={el.pictures}/>
+				    </div>
+                <div>
+                <Card.Body>
 				<Card.Title>{el.name}</Card.Title>
-				<Card.Text>{el.text}</Card.Text>
+				<Card.Text>{el.price} руб</Card.Text>
 				</Card.Body>
+                </div>
+                <Card.Footer>
 				<Button className="m-2" as={Link} to={`/product/${el._id}`}>Страница товара</Button> 
                 <Button className="m-2" id={el._id} variant="primary" onClick={()=>handleShow(el)}>Изменить </Button>
                 <Button className="m-2" onClick={()=>{DeleteProduct(el._id)}} >Удалить </Button>
-
+                </Card.Footer>
 				</Card>
 				 </Col>
 			 
 		)}
+        </Row>
 		                     <Modal show={show} onHide={handleClose}  className= "lg w-100 vh-100">
         <Modal.Header closeButton>
           <Modal.Title>
@@ -256,29 +346,32 @@ function DelReview(product, id)  {
         </Modal.Footer>
       </Modal>     
 
-		  </Row>
+		
 	</Container>
 	</Tab>
 		 <Tab eventKey="Мои отзывы" title="Мои отзывы">
 			{/* <Button onClick={GetReview}>Получить мои отзывы</Button> */}
-		 <Table striped bordered hover size="sm">
-			<thead>
+		{ review.length >0 
+        ? <Table  bordered hover>
+			{/* <thead>
 				<tr>
-					<th>id</th>
-					<th>***</th>
-					<th>text</th>
+					<th>id товара</th>
+					<th>*****</th>
+					<th>Текст</th>
 				</tr>
-			</thead>
+			</thead> */}
+            <tbody >
 			{review.map((el,i)=> el.author._id === localStorage.getItem("user12-id") &&
-			<tbody key={i}>
-				<tr>
-				    <td><Link to={`/product/${el.product}`}>{el.product}</Link></td>
-					<td>{el.rating}</td>
+			
+				<tr key={i}className="table align-middle small">
+				    <td className="w-25 text-center"><Link to={`/product/${el.product}`}><Image className="roudedCircle fluid w-50" src= {((product.filter((e=> e._id=== el.product)).map((f=>f.pictures))))}/></Link></td>
+					<td className="w-25 text-center "><span className="badge text-bg-info w-25 fs-6 text">{el.rating}</span></td>
 					<td>{el.text}</td>
-					<td><Button value={el.product} id={el._id} onClick={()=>DelReview(el.product,el._id)}><Trash3Fill/></Button></td>
-				</tr>
-			</tbody>)}
+					<td><Trash3Fill onClick={()=>DelReview(el.product,el._id)}/></td>
+				</tr>)}
+			</tbody>
 		 </Table>
+         : <div>У вас пока нет отзывов</div>}
 		 </Tab> 
 		 </Tabs>
 
